@@ -19,7 +19,7 @@ export class MessagesWsGateway implements OnGatewayConnection, OnGatewayDisconne
 
   async handleConnection(client: Socket, ...args: any[]) {
     // Corregir typo: 'autentication' → 'authentication'
-    const token = client.handshake.headers.authorization as string
+    const token = client.handshake.headers.autentication as string
     
     // Validar que el token existe
     if (!token) {
