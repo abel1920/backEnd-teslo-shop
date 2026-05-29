@@ -8,10 +8,13 @@ import { SeedModule } from './seed/seed.module';
 import { FilesModule } from './files/files.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { AuthModule } from './auth/auth.module';
+import { MessagesWsModule } from './messages-ws/messages-ws.module';
 
 @Module({
   imports: [ConfigModule.forRoot(),
   TypeOrmModule.forRoot({
+    //SSL para subir la base a la nube
+    ssl: process.env.STAGE === 'prod',
     type: 'postgres',
     host: process.env.DB_HOST,//localhost
     port: +(process.env.DB_PORT ?? '5432'),
@@ -29,7 +32,8 @@ import { AuthModule } from './auth/auth.module';
     CommonModule,
     SeedModule,
     FilesModule,
-    AuthModule // solo hay una rooot
+    AuthModule,
+    MessagesWsModule // solo hay una rooot
 
   ],
 })
